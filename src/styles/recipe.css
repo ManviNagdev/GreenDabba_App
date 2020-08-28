@@ -1,12 +1,12 @@
-.book-list-wrapper {
+.recipe-list-wrapper {
   padding: 16px;
   margin: 64px auto 0;
-  max-width: 768px;
+  max-width: 80%;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
 }
-.book-list-form {
+.recipe-list-form {
   margin-bottom: 32px;
 }
 .form-row {
@@ -81,4 +81,8 @@
 }
 .btn-reset {
   margin: 21px auto 0;
+}
+.img-resize{
+ height: "50";
+ width: "50";
 }

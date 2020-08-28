@@ -17,7 +17,7 @@ app.use(helmet())
 app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-// Implement books route
+// Implement recipes route
 app.use('/recipes', greendabbaRouter)
 // Implement 500 error route
 app.use(function (err, req, res, next) {

@@ -35,8 +35,8 @@ export const RecipeListRow = (props: RecipeListRowUI) => (
     <td className="table-item">
       <a href={props.recipes.youtube_link}>Watch Recipe Video</a>
     </td>
-    <td className="table-item">
-      <img src={props.recipes.image_path} alt={props.recipes.recipe_name}>
+    <td className="table-item img-resize">
+      <img src={props.recipes.image_path} alt={props.recipes.recipe_name} width="250" height="250">
       </img>
     </td>
     <td className="table-item">
@@ -46,5 +46,13 @@ export const RecipeListRow = (props: RecipeListRowUI) => (
         Remove recipe
       </button>
     </td>
+    <td className="table-item">
+      <button
+        className="btn btn-add"
+        onClick={() => props.handleIngredientAdd(props.recipes.recipe_id, props.recipes.recipe_name)}>
+        Add Ingredients
+      </button>
+    </td>
+
   </tr>
 )

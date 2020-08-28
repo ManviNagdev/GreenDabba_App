@@ -50,7 +50,7 @@ export const RecipeList = (props: RecipeListUI) => {
             )
           ) : (
             <tr className="table-row">
-              <td className="table-item" style={{ textAlign: 'center' }} colSpan={6}>There are no recipes to show. Create one!</td>
+              <td className="table-item" style={{ textAlign: 'center' }} colSpan={8}>There are no recipes to show. Create one!</td>
             </tr>
           )
         }
