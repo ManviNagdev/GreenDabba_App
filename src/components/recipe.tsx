@@ -96,6 +96,16 @@ export const Recipe = () => {
     })
     .catch(error => console.error(`There was an error resetting the recipe list: ${error}`))
   }
+  // Add Instruction
+  const handleInstructionAdd = (recipe_id: number, recipe_name: string) => {
+    // Send PUT request to 'recipes/addinstruction' endpoint
+    axios
+      .put('http://localhost:4001/recipes/addinstruction', {recipe_id: recipe_id})
+      .then(() => {
+        console.log(`Adding Instructions for Recipe ${recipe_name}`)
+      })
+      .catch(error => console.error(`There was an error in adding the instructions to ${recipe_name} recipe    : ${error}`))
+  }
   return (
     <div className="recipe-list-wrapper">
       {/* Form for creating new recipe */}
@@ -135,7 +145,7 @@ export const Recipe = () => {
         <button onClick={handleRecipeSubmit} className="btn btn-add">Add the recipe</button>
       </div>
       {/* Render recipe list component */}
-      <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} />
+      <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} handleInstructionAdd={handleInstructionAdd}/>
       {/* Show reset button if list contains at least one recipe */}
       {recipes.length > 0 && (
         <button className="btn btn-reset" onClick={handleListReset}>Reset recipes list.</button>

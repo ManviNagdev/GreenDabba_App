@@ -2,6 +2,7 @@
 const express = require('express')
 // Import greendabba-controller
 const greendabbaRoutes = require('./../controllers/greendabba-controller.js')
+const greendabbaInstructionsRoutes = require('./../controllers/greendabba-controller.js')
 // Create router
 const router = express.Router()
 // Add route for GET request to retrieve all recipes
@@ -20,5 +21,7 @@ router.put('/delete', greendabbaRoutes.recipesDelete)
 // In server.js, recipes route is specified as '/recipes'
 // this means that '/reset' translates to '/recipes/reset'
 router.put('/reset', greendabbaRoutes.recipesReset)
-// Export router
+// Add route for PUT request to add Instructions to the recipe
+router.put('/addinstruction', greendabbaInstructionsRoutes.addInstruction)
+// Export Router
 module.exports = router

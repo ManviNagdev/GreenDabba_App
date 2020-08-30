@@ -67,3 +67,21 @@ exports.recipesReset = async (req, res) => {
       res.json({ message: `There was an error resetting recipe list: ${err}.` })
     })
 }
+// Add Insrtuctions
+exports.addInstruction = async (req, res) => {
+  // Add instruction in the instructions table
+  knex('instructions')
+    .insert({ // insert new record, a recipe
+      'recipe_id': req.body.recipe_id,
+      
+    })
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `Recipe \'${req.body.recipe_name}\'  created.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error creating ${req.body.recipe_name} recipe: ${err}` })
+    })
+
+}
