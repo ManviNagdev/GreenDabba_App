@@ -24,7 +24,7 @@ interface RecipeListUI {
 // Create RecipeList component
 export const RecipeList = (props: RecipeListUI) => {
   // Show loading message
-  if (props.loading) return <p>Leaderboard table is loading...</p>
+  if (props.loading) return <p>Recipes table is loading...</p>
   return (
     <table className="table">
         <thead>

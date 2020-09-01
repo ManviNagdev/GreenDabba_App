@@ -6,11 +6,12 @@ const cors = require('cors')
 const helmet = require('helmet')
 // Import routes
 const greendabbaRouter = require('./routes/greendabba-route')
-const greendabbaInstructionsRouter = require('./routes/greendabba-route')
+//const greendabbaInstructionsRouter = require('./routes/greendabba-route')
 // Set default port for express app
 const PORT = process.env.PORT || 4001
 // Create express app
 const app = express()
+//const app1 = express()
 // Apply middleware
 // Note: Keep this at the top, above routes
 app.use(cors())
@@ -20,8 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // Implement recipes route
 app.use('/recipes', greendabbaRouter)
-// Implement instructions route
-app.use('/instructions', greendabbaInstructionsRouter)
 // Implement 500 error route
 app.use(function (err, req, res, next) {
   console.error(err.stack)
@@ -35,3 +34,4 @@ app.use(function (req, res, next) {
 app.listen(PORT, function() {
   console.log(`Server is running on: ${PORT}`)
 })
+
