@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom'
+// Import components
+import { Recipe } from './components/recipe'
+// Import styles
+import './styles/styles.css'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -10,6 +15,10 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+const rootElement = document.getElementById('root')
+// Render recipe component in the DOM
+render(<Recipe />, rootElement)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -9,6 +9,7 @@ const greendabbaRouter = require('./routes/greendabba-route')
 //const greendabbaInstructionsRouter = require('./routes/greendabba-route')
 // Set default port for express app
 const PORT = process.env.PORT || 4001
+console.log(`server is listening on ${PORT}`)
 // Create express app
 const app = express()
 //const app1 = express()
