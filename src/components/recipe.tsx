@@ -23,7 +23,7 @@ export const Recipe = () => {
   const fetchRecipes = async () => {
     // Send GET request to 'recipes/all' endpoint
     axios
-      .get('http://localhost:4001/recipes/all')
+      .get('http://localhost:3000/recipes/all')
       .then(response => {
         // Update the recipes state
         setRecipes(response.data)
@@ -45,7 +45,7 @@ export const Recipe = () => {
   const handleRecipeCreate = () => {
     // Send POST request to 'recipes/create' endpoint
     axios
-      .post('http://localhost:4001/recipes/create', {
+      .post('http://localhost:3000/recipes/create', {
         recipe_name: recipe_name,
         recipe_description: recipe_description,
         preparation_time: preparation_time,
@@ -76,7 +76,7 @@ export const Recipe = () => {
   const handleRecipeRemove = (recipe_id: number, recipe_name: string) => {
     // Send PUT request to 'recipes/delete' endpoint
     axios
-      .put('http://localhost:4001/recipes/delete', { recipe_id: recipe_id })
+      .put('http://localhost:3000/recipes/delete', { recipe_id: recipe_id })
       .then(() => {
         console.log(`Recipe ${recipe_name} removed.`)
         // Fetch all recipes to refresh
@@ -88,7 +88,7 @@ export const Recipe = () => {
   // Reset recipe list (remove all recipes)
   const handleListReset = () => {
     // Send PUT request to 'recipes/reset' endpoint
-    axios.put('http://localhost:4001/recipes/reset')
+    axios.put('http://localhost:3000/recipes/reset')
     .then(() => {
       // Fetch all recipes to refresh
       // the recipes on the recipe list
@@ -100,7 +100,7 @@ export const Recipe = () => {
   const handleInstructionAdd = (recipe_id: number, recipe_name: string) => {
     // Send PUT request to 'recipes/addinstruction' endpoint
     axios
-      .put('http://localhost:4001/recipes/addinstruction', {recipe_id: recipe_id})
+      .put('http://localhost:3000/recipes/addinstruction', {recipe_id: recipe_id})
       .then(() => {
         console.log(`Adding Instructions for Recipe ${recipe_name}`)
       })
