@@ -35,7 +35,31 @@ exports.recipesCreate = async (req, res) => {
       // Send a error message in response
       res.json({ message: `There was an error creating ${req.body.recipe_name} recipe: ${err}` })
     })
-}
+
+    console.log(req.body.instructionList)
+    recipe_id_inst = knex('recipes').where('recipe_name',  req.body.recipe_name).select('recipe_id')
+    console.log("for debugging", recipe_id_inst)
+    console.log(req.body.instructionList.length)
+
+    var fields = new Array(req.body.instructionList.length);
+    for (i = 0; i < req.body.instructionList.length; i++) {
+      fields[i] = i+1
+    }
+    const fieldsToInsert = fields.map(field => 
+      ({ 'step_no': field, 'recipe_id': recipe_id_inst, 'step': req.body.instructionList[field-1].Instruction })); 
+    console.log(fieldsToInsert)
+    knex('instructions')
+      .insert(fieldsToInsert)
+      .then(() => {
+        // Send a success message in response
+        res.json({ message: `Instruction for recipe \'${req.body.recipe_name}\'  added.` })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error adding instruction for ${req.body.recipe_name} recipe: ${err}` })
+      })
+  }
+
 // Remove specific recipe
 exports.recipesDelete = async (req, res) => {
   // Find specific recipe in the database and remove it
@@ -66,22 +90,4 @@ exports.recipesReset = async (req, res) => {
       // Send a error message in response
       res.json({ message: `There was an error resetting recipe list: ${err}.` })
     })
-}
-// Add Insrtuctions
-exports.addInstruction = async (req, res) => {
-  // Add instruction in the instructions table
-  knex('instructions')
-    .insert({ // insert new record, a recipe
-      'recipe_id': req.body.recipe_id,
-      
-    })
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Recipe \'${req.body.recipe_name}\'  created.` })
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error creating ${req.body.recipe_name} recipe: ${err}` })
-    })
-
 }

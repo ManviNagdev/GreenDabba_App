@@ -22,6 +22,6 @@ router.put('/delete', greendabbaRoutes.recipesDelete)
 // this means that '/reset' translates to '/recipes/reset'
 router.put('/reset', greendabbaRoutes.recipesReset)
 // Add route for PUT request to add Instructions to the recipe
-router.put('/addinstruction', greendabbaRoutes.addInstruction)
+// router.put('/addinstruction', greendabbaRoutes.addInstruction)
 // Export Router
 module.exports = router

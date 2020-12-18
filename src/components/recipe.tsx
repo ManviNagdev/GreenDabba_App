@@ -14,6 +14,7 @@ export const Recipe = () => {
   const [youtube_link, setYoutubeLink] = useState('')
   const [image_path, setImagePath] = useState('')
   const [recipes, setRecipes] = useState([])
+  const [instructionList, setInstructionList] = useState([{ Instruction: '' }])
   const [loading, setLoading] = useState(true)
   // Fetch all recipes on initial render
   useEffect(() => {
@@ -40,6 +41,7 @@ export const Recipe = () => {
     setCookingTime('')
     setYoutubeLink('')
     setImagePath('')
+    setInstructionList([{Instruction:''}])
   }
   // Create new recipe
   const handleRecipeCreate = () => {
@@ -50,8 +52,9 @@ export const Recipe = () => {
         recipe_description: recipe_description,
         preparation_time: preparation_time,
         cooking_time: cooking_time,
-	youtube_link: youtube_link,
-	image_path: image_path
+        youtube_link: youtube_link,
+        image_path: image_path,
+        instructionList: instructionList
       })
       .then(res => {
         console.log(res.data)
@@ -64,7 +67,7 @@ export const Recipe = () => {
   // Submit new recipe
   const handleRecipeSubmit = () => {
     // Check if all fields are filled
-    if (recipe_name.length > 0 && recipe_description.length > 0 && preparation_time.length > 0 && cooking_time.length > 0 && youtube_link.length > 0 && image_path.length > 0) {
+    if (recipe_name.length > 0 && recipe_description.length > 0 && preparation_time.length > 0 && cooking_time.length > 0 && youtube_link.length > 0 && image_path.length > 0 && instructionList.length > 0) {
       // Create new recipe
       handleRecipeCreate()
       console.info(`Recipe ${recipe_name} added.`)
@@ -96,16 +99,23 @@ export const Recipe = () => {
     })
     .catch(error => console.error(`There was an error resetting the recipe list: ${error}`))
   }
-  // Add Instruction
-  const handleInstructionAdd = (recipe_id: number, recipe_name: string) => {
-    // Send PUT request to 'recipes/addinstruction' endpoint
-    axios
-      .put('http://localhost:3000/recipes/addinstruction', {recipe_id: recipe_id})
-      .then(() => {
-        console.log(`Adding Instructions for Recipe ${recipe_name}`)
-      })
-      .catch(error => console.error(`There was an error in adding the instructions to ${recipe_name} recipe    : ${error}`))
-  }
+  const handleInputChange = (e:any, index:number) => {
+    const { name, value } = e.target
+    const list = [...instructionList]
+    list[index] = value
+    setInstructionList(list)
+  };
+
+  const handleRemoveClick = (index:number) => {
+    const list = [...instructionList];
+    list.splice(index, 1);
+    setInstructionList(list);
+  };
+
+  const handleAddClick = () => {
+    setInstructionList([...instructionList, { Instruction: ""}]);
+  };
+
   return (
     <div className="recipe-list-wrapper">
       {/* Form for creating new recipe */}
@@ -131,7 +141,7 @@ export const Recipe = () => {
               <input className="form-input" type="text" id="cooking_time" name="cooking_time" value={cooking_time} onChange={(e) => setCookingTime(e.currentTarget.value)} />
             </fieldset>
           </div>
-	  <div className="form-row">
+          <div className="form-row">
             <fieldset>
               <label className="form-label" htmlFor="youtube_link">Enter youtube link:</label>
               <input className="form-input" type="url" id="youtube_link" name="youtube_link" value={youtube_link} onChange={(e) => setYoutubeLink(e.currentTarget.value)} />
@@ -141,11 +151,29 @@ export const Recipe = () => {
               <input className="form-input" type="url" id="image_path" name="image_path" value={image_path} onChange={(e) => setImagePath(e.currentTarget.value)} />
             </fieldset>
           </div>
-        </div>
+        
+        {instructionList.map((x, i) => {
+        return (
+          <div className="form-row">
+            <fieldset>
+            <label className="form-label" htmlFor="Instruction">Enter Instruction {i+1}:</label>
+            <input className="form-input" type="url" id="Instruction" name="Instruction" value={x.Instruction} onChange={e => handleInputChange(e, i)} />
+            </fieldset>
+            <fieldset>
+            {instructionList.length !== 1 && <button
+              className="btn btn-add" onClick={() => handleRemoveClick(i)}>Remove Instruction</button>}
+            </fieldset>
+            <fieldset>
+            {instructionList.length - 1 === i && <button className="btn btn-add" onClick={handleAddClick}>Add Instruction</button>}
+            </fieldset>
+          </div>
+        );
+      })}
+      </div>
         <button onClick={handleRecipeSubmit} className="btn btn-add">Add the recipe</button>
       </div>
       {/* Render recipe list component */}
-      <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} handleInstructionAdd={handleInstructionAdd}/>
+      <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove}/>
       {/* Show reset button if list contains at least one recipe */}
       {recipes.length > 0 && (
         <button className="btn btn-reset" onClick={handleListReset}>Reset recipes list.</button>

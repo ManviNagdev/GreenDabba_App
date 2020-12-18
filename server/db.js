@@ -29,8 +29,8 @@ knex.schema
           table.string('recipe_description')
           table.string('preparation_time')
           table.string('cooking_time')
-	  table.string('youtube_link')
-	  table.string('image_path')
+          table.string('youtube_link')
+          table.string('image_path')
         })
         .then(() => {
           // Log success message

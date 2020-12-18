@@ -13,7 +13,6 @@ interface RecipeListRowUI {
     image_path: string;
   }
   handleRecipeRemove: (recipe_id: number, recipe_name: string) => void;
-  handleInstructionAdd: (recipe_id: number, recipe_name: string) => void;
 }
 // Create RecipeListRow component
 export const RecipeListRow = (props: RecipeListRowUI) => (
@@ -47,13 +46,13 @@ export const RecipeListRow = (props: RecipeListRowUI) => (
         Remove recipe
       </button>
     </td>
-    <td className="table-item">
+    {/* <td className="table-item">
       <button
         className="btn btn-add"
         onClick={() => props.handleInstructionAdd(props.recipes.recipe_id, props.recipes.recipe_name)}>
         Instructions
       </button>
-    </td>
+    </td> */}
 
   </tr>
 )
