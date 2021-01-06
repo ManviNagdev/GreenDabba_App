@@ -21,7 +21,9 @@ router.put('/delete', greendabbaRoutes.recipesDelete)
 // In server.js, recipes route is specified as '/recipes'
 // this means that '/reset' translates to '/recipes/reset'
 router.put('/reset', greendabbaRoutes.recipesReset)
-// Add route for PUT request to add Instructions to the recipe
-// router.put('/addinstruction', greendabbaRoutes.addInstruction)
+// Add route for POST request to open recipe 
+// In server.js, recipes route is specified as '/recipes'
+// this means that '/open' translates to '/recipes/open'
 // Export Router
+router.post('/open', greendabbaRoutes.recipesOpen)
 module.exports = router

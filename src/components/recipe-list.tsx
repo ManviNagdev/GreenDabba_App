@@ -18,6 +18,7 @@ interface RecipeListUI {
   recipes: RecipeUI[];
   loading: boolean;
   handleRecipeRemove: (recipe_id: number, recipe_name: string) => void;
+  handleRecipeOpen: (recipe_id: number, recipe_name: string) => void;
 }
 
 // Create RecipeList component
@@ -46,6 +47,7 @@ export const RecipeList = (props: RecipeListUI) => {
                 recipes={recipe}
                 position={idx + 1}
                 handleRecipeRemove={props.handleRecipeRemove}
+                handleRecipeOpen={props.handleRecipeOpen}
 	      />
               )
             )
