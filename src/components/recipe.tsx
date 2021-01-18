@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import ReactPlayer from "react-player"
+
 // Import components
 import { RecipeList } from './recipe-list'
+
 // Import styles
 import './../styles/recipe.css'
 // Create Recipe component
+
 export const Recipe = () => {
   // Prepare states
   const [recipe_name, setRecipeName] = useState('')
@@ -19,9 +23,12 @@ export const Recipe = () => {
   const [open_recipe, setOpen] = useState(false)
   // Fetch all recipes on initial render
 
+  // let location = useLocation();
+  // console.log(location)
   useEffect(() => {
     fetchRecipes()
   }, [])
+
   // Fetch all recipes
   const fetchRecipes = async () => {
     // Send GET request to 'recipes/all' endpoint
@@ -91,21 +98,7 @@ export const Recipe = () => {
       .catch(error => console.error(`There was an error removing the ${recipe_name} recipe: ${error}`))
   }
   // Open Recipe
-  const handleRecipeOpen = (recipe_id: number, recipe_name: string) => {
-    // Send PUT request to 'recipes/open' endpoint
-    axios
-      .post('http://localhost:3000/recipes/open', { recipe_id: recipe_id, recipe_name: recipe_name })
-      .then(response => {
-        // Update the recipes state
 
-        setRecipes(response.data)
-        setOpen(true)
-      }
-      )
-      .catch(error => console.error(`There was an error opening the ${recipe_name} recipe: ${error}`))
-
-
-  }
   // Reset recipe list (remove all recipes)
   const handleListReset = () => {
     // Send PUT request to 'recipes/reset' endpoint
@@ -115,10 +108,10 @@ export const Recipe = () => {
         // the recipes on the recipe list
         fetchRecipes()
       })
-      .catch(error => console.error(`There was an error resetting the recipe list: ${error}`))
+      .catch(error => console.error(`There was an error resetting the recipe lgit ist: ${error}`))
   }
   const handleInputChange = (e: any, index: number) => {
-    const { name, value } = e.target
+    const { value } = e.target
     const list = [...instructionList]
     list[index] = value
     setInstructionList(list)
@@ -134,83 +127,67 @@ export const Recipe = () => {
     setInstructionList([...instructionList, { Instruction: "" }]);
   };
 
-  console.log(open_recipe)
-
-  if (open_recipe === true) {
-    return (
-      // write the code for displaying the recipe page
-      <div className="recipe-list-wrapper">
-        {/* Render recipe list component */}
-        <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} handleRecipeOpen={handleRecipeOpen} />
-        {/* Show reset button if list contains at least one recipe */}
-      </div>
-
-    )
-  }
-  else {
-    return (
-      <div className="recipe-list-wrapper">
-        {/* Form for creating new recipe */}
-        <div className="recipe-list-form">
-          <div className="form-wrapper" onSubmit={handleRecipeSubmit}>
-            <div className="form-row">
-              <fieldset>
-                <label className="form-label" htmlFor="recipe_name">Enter recipe name:</label>
-                <input className="form-input" type="text" id="recipe_name" name="recipe_name" value={recipe_name} onChange={(e) => setRecipeName(e.currentTarget.value)} />
-              </fieldset>
-              <fieldset>
-                <label className="form-label" htmlFor="recipe_description">Enter recipe description:</label>
-                <input className="form-input" type="text" id="recipe_description" name="recipe_description" value={recipe_description} onChange={(e) => setRecipeDescription(e.currentTarget.value)} />
-              </fieldset>
-            </div>
-            <div className="form-row">
-              <fieldset>
-                <label className="form-label" htmlFor="preparation_time">Enter preparation time:</label>
-                <input className="form-input" type="text" id="preparation_time" name="preparation_time" value={preparation_time} onChange={(e) => setPreparationTime(e.currentTarget.value)} />
-              </fieldset>
-              <fieldset>
-                <label className="form-label" htmlFor="cooking_time">Enter cooking time:</label>
-                <input className="form-input" type="text" id="cooking_time" name="cooking_time" value={cooking_time} onChange={(e) => setCookingTime(e.currentTarget.value)} />
-              </fieldset>
-            </div>
-            <div className="form-row">
-              <fieldset>
-                <label className="form-label" htmlFor="youtube_link">Enter youtube link:</label>
-                <input className="form-input" type="url" id="youtube_link" name="youtube_link" value={youtube_link} onChange={(e) => setYoutubeLink(e.currentTarget.value)} />
-              </fieldset>
-              <fieldset>
-                <label className="form-label" htmlFor="image_path">Enter image path:</label>
-                <input className="form-input" type="url" id="image_path" name="image_path" value={image_path} onChange={(e) => setImagePath(e.currentTarget.value)} />
-              </fieldset>
-            </div>
-
-            {instructionList.map((x, i) => {
-              return (
-                <div className="form-row">
-                  <fieldset>
-                    <label className="form-label" htmlFor="Instruction">Enter Instruction {i + 1}:</label>
-                    <input className="form-input" type="url" id="Instruction" name="Instruction" value={x.Instruction} onChange={e => handleInputChange(e, i)} />
-                  </fieldset>
-                  <fieldset>
-                    {instructionList.length !== 1 && <button
-                      className="btn btn-add" onClick={() => handleRemoveClick(i)}>Remove Instruction</button>}
-                  </fieldset>
-                  <fieldset>
-                    {instructionList.length - 1 === i && <button className="btn btn-add" onClick={handleAddClick}>Add Instruction</button>}
-                  </fieldset>
-                </div>
-              );
-            })}
+  return (
+    <div className="recipe-list-wrapper">
+      {/* Form for creating new recipe */}
+      <div className="recipe-list-form">
+        <div className="form-wrapper" onSubmit={handleRecipeSubmit}>
+          <div className="form-row">
+            <fieldset>
+              <label className="form-label" htmlFor="recipe_name">Enter recipe name:</label>
+              <input className="form-input" type="text" id="recipe_name" name="recipe_name" value={recipe_name} onChange={(e) => setRecipeName(e.currentTarget.value)} />
+            </fieldset>
+            <fieldset>
+              <label className="form-label" htmlFor="recipe_description">Enter recipe description:</label>
+              <input className="form-input" type="text" id="recipe_description" name="recipe_description" value={recipe_description} onChange={(e) => setRecipeDescription(e.currentTarget.value)} />
+            </fieldset>
           </div>
-          <button onClick={handleRecipeSubmit} className="btn btn-add">Add the recipe</button>
+          <div className="form-row">
+            <fieldset>
+              <label className="form-label" htmlFor="preparation_time">Enter preparation time:</label>
+              <input className="form-input" type="text" id="preparation_time" name="preparation_time" value={preparation_time} onChange={(e) => setPreparationTime(e.currentTarget.value)} />
+            </fieldset>
+            <fieldset>
+              <label className="form-label" htmlFor="cooking_time">Enter cooking time:</label>
+              <input className="form-input" type="text" id="cooking_time" name="cooking_time" value={cooking_time} onChange={(e) => setCookingTime(e.currentTarget.value)} />
+            </fieldset>
+          </div>
+          <div className="form-row">
+            <fieldset>
+              <label className="form-label" htmlFor="youtube_link">Enter youtube link:</label>
+              <input className="form-input" type="url" id="youtube_link" name="youtube_link" value={youtube_link} onChange={(e) => setYoutubeLink(e.currentTarget.value)} />
+            </fieldset>
+            <fieldset>
+              <label className="form-label" htmlFor="image_path">Enter image path:</label>
+              <input className="form-input" type="url" id="image_path" name="image_path" value={image_path} onChange={(e) => setImagePath(e.currentTarget.value)} />
+            </fieldset>
+          </div>
+          {instructionList.map((x, i) => {
+            return (
+              <div className="form-row">
+                <fieldset>
+                  <label className="form-label" htmlFor="Instruction">Enter Instruction {i + 1}:</label>
+                  <input className="form-input" type="url" id="Instruction" name="Instruction" value={x.Instruction} onChange={e => handleInputChange(e, i)} />
+                </fieldset>
+                <fieldset>
+                  {instructionList.length !== 1 && <button
+                    className="btn btn-add" onClick={() => handleRemoveClick(i)}>Remove Instruction</button>}
+                </fieldset>
+                <fieldset>
+                  {instructionList.length - 1 === i && <button className="btn btn-add" onClick={handleAddClick}>Add Instruction</button>}
+                </fieldset>
+              </div>
+            );
+          })}
         </div>
-        {/* Render recipe list component */}
-        <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} handleRecipeOpen={handleRecipeOpen} />
-        {/* Show reset button if list contains at least one recipe */}
-        {recipes.length > 0 && (
-          <button className="btn btn-reset" onClick={handleListReset}>Reset recipes list.</button>
-        )}
+        <button onClick={handleRecipeSubmit} className="btn btn-add">Add the recipe</button>
       </div>
-    )
-  }
+      {/* Render recipe list component */}
+      <RecipeList recipes={recipes} loading={loading} handleRecipeRemove={handleRecipeRemove} />
+      {/* Show reset button if list contains at least one recipe */}
+      {recipes.length > 0 && (
+        <button className="btn btn-reset" onClick={handleListReset}>Reset recipes list.</button>
+      )}
+    </div>
+  )
 }

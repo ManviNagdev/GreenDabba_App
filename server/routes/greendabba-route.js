@@ -25,5 +25,5 @@ router.put('/reset', greendabbaRoutes.recipesReset)
 // In server.js, recipes route is specified as '/recipes'
 // this means that '/open' translates to '/recipes/open'
 // Export Router
-router.post('/open', greendabbaRoutes.recipesOpen)
+router.post('/viewRecipe', greendabbaRoutes.recipesOpen)
 module.exports = router

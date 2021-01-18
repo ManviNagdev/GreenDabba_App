@@ -1,4 +1,8 @@
 // Import deps
+import {
+  BrowserRouter as BRouter,
+  Link,
+} from "react-router-dom";
 import React from 'react'
 // Create interfaces
 interface RecipeListRowUI {
@@ -13,21 +17,21 @@ interface RecipeListRowUI {
     image_path: string;
   }
   handleRecipeRemove: (recipe_id: number, recipe_name: string) => void;
-  handleRecipeOpen: (recipe_id: number, recipe_name: string) => void;
 }
+
 // Create RecipeListRow component
+
 export const RecipeListRow = (props: RecipeListRowUI) => (
+
   <tr className="table-row">
     <td className="table-item">
       {props.position}
     </td>
     <td className="table-item">
-      <button
-        className="btn btn-remove"
-        onClick={() => props.handleRecipeOpen(props.recipes.recipe_id, props.recipes.recipe_name)}>
+      <Link to={`/viewRecipe?recipe_name=${props.recipes.recipe_name}`} >
         {props.recipes.recipe_name}
-      </button>
-      
+      </Link>
+
     </td>
     <td className="table-item">
       {props.recipes.recipe_description}
@@ -53,4 +57,5 @@ export const RecipeListRow = (props: RecipeListRowUI) => (
       </button>
     </td>
   </tr>
+
 )

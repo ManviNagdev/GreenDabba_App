@@ -8,19 +8,19 @@ import { render } from 'react-dom'
 import { Recipe } from './components/recipe'
 // Import styles
 import './styles/styles.css'
+import Navbar from './components/navbar';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+
+  <App />,
   document.getElementById('root')
 );
 
 const rootElement = document.getElementById('root')
 // Render recipe component in the DOM
-render(<Recipe />, rootElement)
+// render(<Navbar />, rootElement)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();

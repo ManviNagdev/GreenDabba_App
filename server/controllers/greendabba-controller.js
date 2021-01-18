@@ -92,15 +92,15 @@ exports.recipesReset = async (req, res) => {
     })
 }
 // Open a recipe
-exports.recipesOpen = (req, res) => {
+exports.recipesOpen = async (req, res) => {
   // Get all recipes from database
-  console.log(req.body)
   knex
     .select('*') // select all records
     .from('recipes') // from 'recipes' table
-    .where('recipe_id', req.body.recipe_id)
+    .where('recipe_name', req.body.recipe_name)
     .then(userData => {
       // Send recipes extracted from database in response
+      //res.redirect('/viewRecipe/')
       res.json(userData)
     })
     .catch(err => {

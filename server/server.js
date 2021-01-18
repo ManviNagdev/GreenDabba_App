@@ -21,6 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // Implement recipes route
 app.use('/recipes', greendabbaRouter)
+// app.use('/recipes/open', greendabbaRouter, (req, res) => {
+//   const feeds = [
+//     { recipe_id },
+//     { recipe_name }
+//   ]
+//   //console.log(res)
+//   // res.status(200).json(feeds);
+// });
+
 // Implement 500 error route
 app.use(function (err, req, res, next) {
   console.error(err.stack)
