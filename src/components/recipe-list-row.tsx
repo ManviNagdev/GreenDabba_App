@@ -28,7 +28,7 @@ export const RecipeListRow = (props: RecipeListRowUI) => (
       {props.position}
     </td>
     <td className="table-item">
-      <Link to={`/viewRecipe?recipe_name=${props.recipes.recipe_name}`} >
+      <Link to={`/viewRecipe?id=${props.recipes.recipe_id}`} >
         {props.recipes.recipe_name}
       </Link>
 

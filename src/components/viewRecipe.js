@@ -5,35 +5,21 @@ import ReactPlayer from 'react-player'
 export const ViewRecipe = () => {
     // Prepare states
     const [recipes, setRecipes] = useState([]);
-    useEffect(() => {
-        fetchRecipes()
-    }, [])
 
-    // Fetch all recipes
-    const fetchRecipes = async () => {
-        // Send GET request to 'recipes/all' endpoint
-        axios
-            .get('http://localhost:3000/recipes/all')
-            .then(response => {
-                // Update the recipes state
-                setRecipes(response.data)
-                // Update loading state
-
-            })
-            .catch(error => console.error(`There was an error retrieving the recipe list: ${error}`))
-    }
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get('recipe_name')
+    const id = parseInt(urlParams.get('recipe_id'), 10)
+    console.log(id)
     axios
-        .post('http://localhost:3000/recipes/viewRecipe/', { recipe_name: name })
+        .post('http://localhost:3000/recipes/viewRecipe/', { recipe_id: id })
 
         .then(response => {
             setRecipes(response.data)
 
         }
         )
-        .catch(error => console.error(`There was an error opening the ${name} recipe: ${error}`))
+        .catch(error => console.error(`There was an error opening the ${id} recipe: ${error}`))
+    console.log(recipes)
     return (
         <div className="recipe-list-wrapper">
             {recipes.map((index) => (

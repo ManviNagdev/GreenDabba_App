@@ -97,10 +97,26 @@ exports.recipesOpen = async (req, res) => {
   knex
     .select('*') // select all records
     .from('recipes') // from 'recipes' table
-    .where('recipe_name', req.body.recipe_name)
+    .where('recipe_id', req.body.recipe_id)
     .then(userData => {
       // Send recipes extracted from database in response
       //res.redirect('/viewRecipe/')
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving recipes: ${err}` })
+    })
+}
+
+exports.recipesSelect = async (req, res) => {
+  // Get all recipes from database
+  knex
+    .select('*') // select all records
+    .from('recipes')
+    .limit(8) // from 'recipes' table
+    .then(userData => {
+      // Send recipes extracted from database in response
       res.json(userData)
     })
     .catch(err => {

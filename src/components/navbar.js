@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MdFingerprint } from 'react-icons/md'
+import { IoFastFoodOutline } from 'react-icons/io5'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { Button } from './Button'
 import './navbar.css'
@@ -33,7 +33,7 @@ function Navbar() {
                 <div className="navbar">
                     <div className="navbar-container container">
                         <Link to='/' className="navbar-logo" onClick={closeMobileMenu}>
-                            <MdFingerprint className='navbar-icon' />
+                            <IoFastFoodOutline className='navbar-icon' />
                             Home
                     </Link>
                         <div className="menu-icon" onClick={handleClick}>

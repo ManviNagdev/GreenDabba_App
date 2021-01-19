@@ -22,8 +22,9 @@ router.put('/delete', greendabbaRoutes.recipesDelete)
 // this means that '/reset' translates to '/recipes/reset'
 router.put('/reset', greendabbaRoutes.recipesReset)
 // Add route for POST request to open recipe 
-// In server.js, recipes route is specified as '/recipes'
-// this means that '/open' translates to '/recipes/open'
-// Export Router
 router.post('/viewRecipe', greendabbaRoutes.recipesOpen)
+// Add route for POST request to view recipes on homepage 
+router.post('/viewRecipeHome', greendabbaRoutes.recipesSelect)
+
+// Export Router
 module.exports = router

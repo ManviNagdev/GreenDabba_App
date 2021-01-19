@@ -7,17 +7,21 @@ import { Recipe } from './components/recipe';
 import Home from './components/pages/HomePage/Home';
 import SignUp from './components/pages/SignUp/SignUp';
 import { ViewRecipe } from './components/viewRecipe';
+import { GlobalStyle } from './globalStyles';
 
 function App() {
   return (
     <Router>
+      <GlobalStyle />
       <Navbar />
+
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/sign-up' component={SignUp} />
         <Route path='/Recipe' component={Recipe} />
         <Route path='/viewRecipe' component={ViewRecipe} />
       </Switch>
+
     </Router>
   );
 }
