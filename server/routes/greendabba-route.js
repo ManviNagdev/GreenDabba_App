@@ -23,6 +23,8 @@ router.put('/delete', greendabbaRoutes.recipesDelete)
 router.put('/reset', greendabbaRoutes.recipesReset)
 // Add route for POST request to open recipe 
 router.post('/viewRecipe', greendabbaRoutes.recipesOpen)
+// Add route for POST request to open instructions
+router.post('/viewInstruction', greendabbaRoutes.instructionsOpen)
 // Add route for POST request to view recipes on homepage 
 router.post('/viewRecipeHome', greendabbaRoutes.recipesSelect)
 
