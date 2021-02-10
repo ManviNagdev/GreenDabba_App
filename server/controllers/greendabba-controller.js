@@ -94,24 +94,6 @@ exports.recipesReset = async (req, res) => {
 // Open a recipe
 exports.recipesOpen = async (req, res) => {
   // Get all recipes from database
-  // knex
-  //   .select('*') // select all records
-  //   .from('recipes', 'instructions') // from 'recipes' table
-  //   .join('instructions', function () {
-  //     this.on('recipes.recipe_id', '=', 'instructions.recipe_id')
-  //   })
-  //   .where('recipes.recipe_id', req.body.recipe_id)
-  //   .then(userData => {
-  //     // Send recipes extracted from database in response
-  //     //res.redirect('/viewRecipe/')
-
-  //     res.json(userData)
-  //   })
-  //   .catch(err => {
-  //     // Send a error message in response
-  //     res.json({ message: `There was an error retrieving recipes: ${err}` })
-  //   })
-
   knex
     .select('*') // select all records
     .from('recipes') // from 'recipes' table
