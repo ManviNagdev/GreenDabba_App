@@ -9,9 +9,9 @@ function Home() {
         <>
             <HeroSection {...homeObjOne} />
             <Products heading='Start Cooking ...' />
-            <HeroSection {...homeObjThree} />
+            {/* <HeroSection {...homeObjThree} /> */}
             <HeroSection {...homeObjTwo} />
-            <HeroSection {...homeObjFour} />
+            {/* <HeroSection {...homeObjFour} /> */}
         </>
     );
 }

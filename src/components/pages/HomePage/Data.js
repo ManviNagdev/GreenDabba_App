@@ -16,13 +16,13 @@ export const homeObjTwo = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: '100% SECURE',
-    headline: 'Stay protected 24/7 anywhere anytime',
+    topLine: 'Effortless Search',
+    headline: 'Search by recipe name or category or ingredients',
     description:
-        'We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime',
+        'Do you want to search a specific recipe or get a list of recipes based on the food category or the ingredients that you have? The solution is just a click away.',
     buttonLabel: 'Learn More',
-    imgStart: '',
-    img: 'images/svg-5.svg',
+    imgStart: 'start',
+    img: 'images/lentil-dahl-indian-curry.jpg',
     alt: 'Vault'
 };
 

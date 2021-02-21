@@ -99,8 +99,6 @@ exports.recipesOpen = async (req, res) => {
     .from('recipes') // from 'recipes' table
     .where('recipe_id', req.body.recipe_id)
     .then(userData => {
-      // Send recipes extracted from database in response
-      //res.redirect('/viewRecipe/')
       res.json(userData)
     })
     .catch(err => {
@@ -113,11 +111,9 @@ exports.instructionsOpen = async (req, res) => {
   // Get all recipes from database
   knex
     .select('step') // select all records
-    .from('instructions') // from 'recipes' table
+    .from('instructions') // from 'instructions' table
     .where('recipe_id', req.body.recipe_id)
     .then(userData => {
-      // Send recipes extracted from database in response
-      //res.redirect('/viewRecipe/')
       res.json(userData)
     })
     .catch(err => {
@@ -126,13 +122,12 @@ exports.instructionsOpen = async (req, res) => {
     })
 }
 
-
 exports.recipesSelect = async (req, res) => {
   // Get all recipes from database
   knex
     .select('*') // select all records
-    .from('recipes')
-    .limit(8) // from 'recipes' table
+    .from('recipes') // from 'recipes' table
+    .limit(8)
     .then(userData => {
       // Send recipes extracted from database in response
       res.json(userData)
